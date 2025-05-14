@@ -23,17 +23,17 @@ This project provides a Python-based tool to **scrape posts and topics from the 
 ## Getting Started
 
 ### 1. Install Dependencies
-pip install selenium undetected-chromedriver beautifulsoup4 requests
+`pip install selenium undetected-chromedriver beautifulsoup4 requests`
 
 
 ### 2. Configure Your Scraping Parameters
 
 Open `config.py` and adjust these variables as needed:
 
-DATE_FORMAT = "%Y-%m-%d"
-START_DATE = datetime.strptime("2025-01-01", DATE_FORMAT) # <-- Change this
-END_DATE = datetime.strptime("2025-04-14", DATE_FORMAT) # <-- And this
-PAGES = 10 # <-- And this!
+- DATE_FORMAT = "%Y-%m-%d"
+- START_DATE = datetime.strptime("2025-01-01", DATE_FORMAT) # <-- Change this
+- END_DATE = datetime.strptime("2025-04-14", DATE_FORMAT) # <-- And this
+- PAGES = 10 # <-- And this!
 
 - **START_DATE** and **END_DATE**: Only topics created between these dates will be scraped.
 - **PAGES**: This is a special variable. It controls how many pages of topics to fetch from Discourse.  
@@ -41,7 +41,7 @@ PAGES = 10 # <-- And this!
   - **Experiment:** Adjust `PAGES` up or down depending on how many topics you expect or how exhaustive you want the scrape to be.
 
 ### 3. Run the Scraper
-python discourse_scrapper.py
+`python discourse_scrapper.py`
 
 
 - On first run, a Chrome window will open for you to log in via Google SSO.
@@ -70,10 +70,10 @@ python discourse_scrapper.py
 
 Suppose you want to scrape only topics from February 2025 and limit to 5 pages:
 
-config.py
-START_DATE = datetime.strptime("2025-02-01", DATE_FORMAT)
-END_DATE = datetime.strptime("2025-02-28", DATE_FORMAT)
-PAGES = 5
+`config.py`
+- START_DATE = datetime.strptime("2025-02-01", DATE_FORMAT)
+- END_DATE = datetime.strptime("2025-02-28", DATE_FORMAT)
+- PAGES = 5
 
 
 ---
