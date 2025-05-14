@@ -34,6 +34,7 @@ Open `config.py` and adjust these variables as needed:
 - START_DATE = datetime.strptime("2025-01-01", DATE_FORMAT) # <-- Change this
 - END_DATE = datetime.strptime("2025-04-14", DATE_FORMAT) # <-- And this
 - PAGES = 10 # <-- And this!
+# 
 
 - **START_DATE** and **END_DATE**: Only topics created between these dates will be scraped.
 - **PAGES**: This is a special variable. It controls how many pages of topics to fetch from Discourse.  
