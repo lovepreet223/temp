@@ -1,89 +1,106 @@
-# IIT Madras Online Degree Discourse Scraper
+# TDS Content Scraper
 
-This project provides a Python-based tool to **scrape posts and topics from the IIT Madras Online Degree Discourse forum** for a specified date range. It uses Selenium (with undetected-chromedriver) for authentication and Requests for efficient data fetching.
-
----
-
-## Features
-
-- **Date Range Filtering:** Scrape only topics created within your chosen start and end dates.
-- **Page Limit Control:** Limit how many forum pages to scrape, for faster or more exhaustive runs.
-- **Google SSO Support:** Handles login via Google Single Sign-On (SSO) using Selenium.
-- **Structured Output:** Saves scraped data as a JSON file for easy analysis.
+This project provides a Python-based web scraper for extracting content from the [TDS website](https://tds.s-anand.net/#/2025-01) using [Playwright](https://playwright.dev/python/). It navigates through the site's sidebar, scrapes each content page, and saves the results (including titles, hierarchy, content, and links) into a structured JSON file.
 
 ---
 
-## File Structure
-
-- `config.py`: Set your scraping parameters here (dates, pages).
-- `discourse_scrapper.py`: Main script for scraping the forum.
-
----
-
-## Getting Started
-
-### 1. Install Dependencies
-`pip install selenium undetected-chromedriver beautifulsoup4 requests`
-
-
-### 2. Configure Your Scraping Parameters
-
-Open `config.py` and adjust these variables as needed:
-
-- DATE_FORMAT = "%Y-%m-%d"
-- START_DATE = datetime.strptime("2025-01-01", DATE_FORMAT) # <-- Change this
-- END_DATE = datetime.strptime("2025-04-14", DATE_FORMAT) # <-- And this
-- PAGES = 10 # <-- And this!
-# 
-
-- **START_DATE** and **END_DATE**: Only topics created between these dates will be scraped.
-- **PAGES**: This is a special variable. It controls how many pages of topics to fetch from Discourse.  
-  - **Tip:** If you want to ensure you cover all topics within your date range, you can increase this number.  
-  - **Experiment:** Adjust `PAGES` up or down depending on how many topics you expect or how exhaustive you want the scrape to be.
-
-### 3. Run the Scraper
-`python discourse_scrapper.py`
-
-
-- On first run, a Chrome window will open for you to log in via Google SSO.
-- Once logged in, press ENTER in your terminal to continue.
-- The script will save your login cookies for future runs.
-
-### 4. Output
-
-- Scraped data is saved to `scraped_data.json` in the current directory.
-- Each entry includes:
-  - Topic title and URL
-  - First post content
-  - All subsequent posts (with URLs and text, including links)
+## Project Structure
+.
+├── config.py
+├── content_scraper.py
+└── README.md
 
 ---
 
-## Notes & Tips
+## Files Overview
 
-- **Authentication:** The script saves your login cookies after the first run, so you don't need to log in every time.
-- **Forum Category:** By default, it scrapes the "TDS Knowledge Base" category. You can change `CATEGORY_URL` in the script if needed.
-- **Respect Rate Limits:** Avoid setting `PAGES` too high to prevent overloading the forum.
+- **config.py**  
+  Contains configuration variables, specifically the path to Playwright browsers for Conda environments.
+
+- **content_scraper.py**  
+  Main script that launches a Chromium browser, navigates the TDS website, scrapes all sidebar-linked content, and saves the results to `tds_scraped_data.json`.
 
 ---
 
-## Example: Customizing Your Scrape
+## Prerequisites
 
-Suppose you want to scrape only topics from February 2025 and limit to 5 pages:
+- Python 3.7+
+- [Playwright for Python](https://playwright.dev/python/docs/intro)
+- [Miniconda](https://docs.conda.io/en/latest/miniconda.html) (if using Conda environments)
 
-`config.py`
-- START_DATE = datetime.strptime("2025-02-01", DATE_FORMAT)
-- END_DATE = datetime.strptime("2025-02-28", DATE_FORMAT)
-- PAGES = 5
+---
 
+## Setup Instructions
+
+1. **Install Dependencies**
+
+    ```
+    pip install playwright
+    playwright install
+    ```
+
+    If using Conda, ensure Playwright browsers are installed in your Conda environment:
+
+    ```
+    playwright install
+    ```
+
+2. **Configure Browser Path**
+
+    Edit `config.py` to set the correct path to your Playwright browsers.  
+    Example (default provided):
+
+    ```
+    PLAYWRIGHT_BROWSERS_PATH = r"C:\Users\<YourUsername>\miniconda3\playwright"
+    ```
+
+---
+
+## Usage
+
+Run the scraper with:
+
+`python content_scraper.py`
+
+
+- The browser will open and automatically navigate through all sidebar links.
+- Scraped data will be saved to `tds_scraped_data.json` in the current directory.
+
+---
+
+## Output
+
+- **tds_scraped_data.json**  
+  A JSON file containing an array of objects, each with:
+  - `title`: Page title
+  - `hierarchy`: List representing the folder structure in the sidebar
+  - `content`: Main textual content of the page
+  - `links`: All links found in the content (with text and URL)
+  - `url`: Full URL to the scraped page
+
+---
+
+## Customization
+
+- **Headless Mode**  
+  By default, the browser runs in non-headless mode (`headless=False`).  
+  To run without opening a browser window, set `headless=True` in `content_scraper.py`.
+
+- **Timeouts and User-Agent**  
+  You can adjust timeouts or the user-agent string in `content_scraper.py` for more robust scraping.
 
 ---
 
 ## Troubleshooting
 
-- **Login Issues:** If login fails, delete `discourse_cookies.pkl` and rerun the script.
-- **Missing Data:** Increase `PAGES` if you think some topics in your date range are missing.
-- **Dependencies:** Ensure Chrome browser is installed and matches your ChromeDriver version.
+- **Playwright Browser Not Found:**  
+  Ensure `PLAYWRIGHT_BROWSERS_PATH` in `config.py` matches the actual location of Playwright browsers, especially if using Conda.
+
+- **Timeouts:**  
+  If you encounter timeouts, try increasing timeout values in the script.
+
+- **Permission Issues:**  
+  Run the script with appropriate permissions or in a virtual environment.
 
 ---
 
@@ -93,11 +110,12 @@ MIT License
 
 ---
 
-## Contributions
+## Acknowledgements
 
-Pull requests and suggestions welcome!
+- [Playwright for Python](https://playwright.dev/python/)
+- [TDS by S Anand](https://tds.s-anand.net/)
 
 ---
 
-Enjoy exploring the IITM Online Degree Discourse forum data!
+*Happy scraping!*
 
