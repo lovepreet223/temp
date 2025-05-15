@@ -6,9 +6,9 @@ This project provides a Python-based web scraper for extracting content from the
 
 ## Project Structure
 
-├── config.py
-├── content_scraper.py
-└── README.md
+- config.py
+- content_scraper.py
+- README.md
 
 ---
 
