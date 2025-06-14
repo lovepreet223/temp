@@ -19,13 +19,13 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "24f2006061@ds.study.iitm.ac.in"
 
-      - name: Make a commit
+      - name: 24f2006061@ds.study.iitm.ac.in
         run: |
           echo "Committed at $(date)" > date.txt
           git add date.txt
           git commit -m "Daily automated commit at $(date -u)" || echo "No changes to commit"
 
-      - name: Push changes
+      - name: 24f2006061@ds.study.iitm.ac.in
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
