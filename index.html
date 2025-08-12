@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Quarterly Earnings Report — Interactive RevealJS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Reveal.js core and themes via CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/reveal.css" />
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js@5/dist/theme/black.css" id="theme" />
+
+    <!-- Code syntax highlighting (Highlight.js theme) -->
+    <link rel="stylesheet" href="https://unpkg.com/highlight.js@11.9.0/styles/github.min.css" />
+
+    <style>
+      .small { font-size: 0.8em; }
+      .muted { color: #aaa; }
+      .kpi { font-size: 2.2em; font-weight: 700; }
+      .pill { display:inline-block; padding: 0.2em 0.6em; border-radius: 999px; background:#222; color:#0ff; }
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: start; }
+      .badge { background: #0a84ff; color: white; border-radius: 4px; padding: 0.1em 0.4em; font-size: 0.7em; }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Title -->
+        <section>
+          <h2>Quarterly Earnings Report</h2>
+          <p class="muted">Interactive Stakeholder Presentation</p>
+          <p class="small">Prepared by: 24f2006061@ds.study.iitm.ac.in</p>
+          <aside class="notes">
+            Welcome and quick run-through of the agenda: financial highlights, revenue breakdowns, guidance, and Q&A.
+          </aside>
+        </section>
+
+        <!-- Agenda with fragments (animated elements) -->
+        <section>
+          <h3>Agenda</h3>
+          <ul>
+            <li class="fragment">Financial highlights and KPIs</li>
+            <li class="fragment">Revenue mix and trends</li>
+            <li class="fragment">Cost drivers and margins</li>
+            <li class="fragment">Guidance and scenarios</li>
+            <li class="fragment">Q&amp;A</li>
+          </ul>
+          <aside class="notes">
+            Advance one bullet at a time using fragments to focus attention on each section.
+          </aside>
+        </section>
+
+        <!-- KPI fragments -->
+        <section>
+          <h3>Highlights</h3>
+          <p class="fragment kpi">Revenue: $1.25B</p>
+          <p class="fragment kpi">Net Income: $210M</p>
+          <p class="fragment kpi">EPS (diluted): $1.12</p>
+          <p class="fragment">YoY growth accelerated in subscription and payments.</p>
+          <aside class="notes">
+            Emphasize revenue growth, profitability, and EPS leverage vs prior quarter.
+          </aside>
+        </section>
+
+        <!-- Markdown slide (using data-markdown) -->
+        <section data-markdown>
+          <textarea data-template>
+### Revenue Mix (Markdown)
+
+- Subscription: 58%
+- Services: 24%
+- Payments: 18%
+
+> Higher retention and ARPU expansion supported subscription gains.
+
+Notes:
+- This slide is written in Markdown and rendered by RevealJS.
+- Keep bullets concise and emphasize mix stability and margins.
+          </textarea>
+          <aside class="notes">
+            Call out mix durability and correlation with margin expansion.
+          </aside>
+        </section>
+
+        <!-- Code sample with syntax highlighting -->
+        <section>
+          <h3>Scenario Modeling Snippet <span class="badge">code</span></h3>
+          <div class="two-col">
+            <div>
+<pre><code class="language-python">
+def eps(revenue, margin, shares):
+    """Simple EPS model."""
+    operating_income = revenue * margin
+    tax_rate = 0.21
+    net_income = operating_income * (1 - tax_rate)
+    return net_income / shares
+
+# Example:
+print(eps(1_250_000_000, 0.22, 187_500_000))
+</code></pre>
+            </div>
+            <div>
+<pre><code class="language-javascript">
+// Growth projection
+const proj = (rev, growth, q=4) =>
+  Array.from({length: q}, (_,i) => rev * (1 + growth)**(i+1));
+
+// Example:
+console.log(proj(1.25e9, 0.05));
+</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            Explain how simple functions can power interactive dashboards and what-if analysis.
+          </aside>
+        </section>
+
+        <!-- Financial math (LaTeX via MathJax plugin) -->
+        <section>
+          <h3>Financial Formulas</h3>
+          <p>Present Value of a cash flow stream:</p>
+          <p>
+            \\[
+              PV = \sum_{t=1}^{T} \frac{CF_t}{(1 + r)^t}
+            \\]
+          </p>
+          <p>Dividend Discount Model (Gordon Growth):</p>
+          <p>
+            \\[
+              P_0 = \frac{D_1}{r - g}, \quad r &gt; g
+            \\]
+          </p>
+          <p>WACC:</p>
+          <p>
+            \\[
+              \mathrm{WACC} = \frac{E}{D+E}R_e + \frac{D}{D+E}R_d(1 - \tau)
+            \\]
+          </p>
+          <aside class="notes">
+            Tie each formula to valuation implications for guidance and sensitivity.
+          </aside>
+        </section>
+
+        <!-- Progressive disclosure with fragments -->
+        <section>
+          <h3>Guidance Scenarios</h3>
+          <p class="fragment"><span class="pill">Base</span> Revenue +5–7%, Margin ~22%</p>
+          <p class="fragment"><span class="pill">Upside</span> Revenue +8–10%, Margin ~23–24%</p>
+          <p class="fragment"><span class="pill">Downside</span> Revenue +2–3%, Margin ~20–21%</p>
+          <aside class="notes">
+            Highlight risk factors: FX, credit losses, and compliance costs.
+          </aside>
+        </section>
+
+        <!-- Contact & wrap-up -->
+        <section>
+          <h3>Contact</h3>
+          <p>Questions or follow-ups:</p>
+          <p><strong>Email:</strong> 24f2006061@ds.study.iitm.ac.in</p>
+          <aside class="notes">
+            Offer to share the underlying model notebooks and data dictionary.
+          </aside>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://unpkg.com/reveal.js@5/plugin/markdown/markdown.js"></script>
+    <script src="https://unpkg.com/reveal.js@5/plugin/notes/notes.js"></script>
+    <script src="https://unpkg.com/reveal.js@5/plugin/highlight/highlight.js"></script>
+    <script src="https://unpkg.com/highlight.js@11.9.0/lib/common.min.js"></script>
+    <script src="https://unpkg.com/reveal.js@5/plugin/math/math.js"></script>
+
+    <script>
+      // Initialize Reveal
+      Reveal.initialize({
+        hash: true,
+        slideNumber: 'c/t',
+        plugins: [ RevealMarkdown, RevealNotes, RevealHighlight, RevealMath.KaTeX ],
+        // Optional: tweak look/feel
+        controls: true,
+        progress: true,
+        center: true
+      });
+
+      // Ensure highlight.js is active
+      Reveal.on('ready', () => {
+        document.querySelectorAll('pre code').forEach(block => {
+          window.hljs?.highlightElement(block);
+        });
+      });
+    </script>
+  </body>
+</html>
